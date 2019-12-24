@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 9,
-    "identityHash": "ceaeb211922de9668d95362a86917dac",
+    "version": 5,
+    "identityHash": "1c62806166a2886751e22adada684c1a",
     "entities": [
       {
         "tableName": "Event",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `identifier` TEXT NOT NULL, `startsAt` TEXT NOT NULL, `endsAt` TEXT NOT NULL, `timezone` TEXT NOT NULL, `privacy` TEXT NOT NULL, `paymentCountry` TEXT, `paypalEmail` TEXT, `thumbnailImageUrl` TEXT, `schedulePublishedOn` TEXT, `paymentCurrency` TEXT, `ownerDescription` TEXT, `originalImageUrl` TEXT, `onsiteDetails` TEXT, `ownerName` TEXT, `largeImageUrl` TEXT, `deletedAt` TEXT, `ticketUrl` TEXT, `locationName` TEXT, `codeOfConduct` TEXT, `state` TEXT, `searchableLocationName` TEXT, `description` TEXT, `pentabarfUrl` TEXT, `xcalUrl` TEXT, `logoUrl` TEXT, `externalEventUrl` TEXT, `iconImageUrl` TEXT, `icalUrl` TEXT, `createdAt` TEXT, `bankDetails` TEXT, `chequeDetails` TEXT, `isComplete` INTEGER NOT NULL, `latitude` REAL, `longitude` REAL, `refundPolicy` TEXT, `canPayByStripe` INTEGER NOT NULL, `canPayByCheque` INTEGER NOT NULL, `canPayByBank` INTEGER NOT NULL, `canPayByPaypal` INTEGER NOT NULL, `canPayOnsite` INTEGER NOT NULL, `isSponsorsEnabled` INTEGER NOT NULL, `hasOwnerInfo` INTEGER NOT NULL, `isSessionsSpeakersEnabled` INTEGER NOT NULL, `isTicketingEnabled` INTEGER NOT NULL, `isTaxEnabled` INTEGER NOT NULL, `isMapShown` INTEGER NOT NULL, `favorite` INTEGER NOT NULL, `favoriteEventId` INTEGER, `eventTopic` TEXT, `eventType` TEXT, `eventSubTopic` TEXT, `speakersCall` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `identifier` TEXT NOT NULL, `startsAt` TEXT NOT NULL, `endsAt` TEXT NOT NULL, `timezone` TEXT NOT NULL, `privacy` TEXT NOT NULL, `paymentCountry` TEXT, `paypalEmail` TEXT, `thumbnailImageUrl` TEXT, `schedulePublishedOn` TEXT, `paymentCurrency` TEXT, `organizerDescription` TEXT, `originalImageUrl` TEXT, `onsiteDetails` TEXT, `organizerName` TEXT, `largeImageUrl` TEXT, `deletedAt` TEXT, `ticketUrl` TEXT, `locationName` TEXT, `codeOfConduct` TEXT, `state` TEXT, `searchableLocationName` TEXT, `description` TEXT, `pentabarfUrl` TEXT, `xcalUrl` TEXT, `logoUrl` TEXT, `externalEventUrl` TEXT, `iconImageUrl` TEXT, `icalUrl` TEXT, `createdAt` TEXT, `bankDetails` TEXT, `chequeDetails` TEXT, `isComplete` INTEGER NOT NULL, `latitude` REAL, `longitude` REAL, `refundPolicy` TEXT, `canPayByStripe` INTEGER NOT NULL, `canPayByCheque` INTEGER NOT NULL, `canPayByBank` INTEGER NOT NULL, `canPayByPaypal` INTEGER NOT NULL, `canPayOnsite` INTEGER NOT NULL, `isSponsorsEnabled` INTEGER NOT NULL, `hasOrganizerInfo` INTEGER NOT NULL, `isSessionsSpeakersEnabled` INTEGER NOT NULL, `isTicketingEnabled` INTEGER NOT NULL, `isTaxEnabled` INTEGER NOT NULL, `isMapShown` INTEGER NOT NULL, `favorite` INTEGER NOT NULL, `eventTopic` TEXT, `eventType` TEXT, `eventSubTopic` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -81,8 +81,8 @@
             "notNull": false
           },
           {
-            "fieldPath": "ownerDescription",
-            "columnName": "ownerDescription",
+            "fieldPath": "organizerDescription",
+            "columnName": "organizerDescription",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -99,8 +99,8 @@
             "notNull": false
           },
           {
-            "fieldPath": "ownerName",
-            "columnName": "ownerName",
+            "fieldPath": "organizerName",
+            "columnName": "organizerName",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -267,8 +267,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "hasOwnerInfo",
-            "columnName": "hasOwnerInfo",
+            "fieldPath": "hasOrganizerInfo",
+            "columnName": "hasOrganizerInfo",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -303,12 +303,6 @@
             "notNull": true
           },
           {
-            "fieldPath": "favoriteEventId",
-            "columnName": "favoriteEventId",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
             "fieldPath": "eventTopic",
             "columnName": "eventTopic",
             "affinity": "TEXT",
@@ -323,12 +317,6 @@
           {
             "fieldPath": "eventSubTopic",
             "columnName": "eventSubTopic",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "speakersCall",
-            "columnName": "speakersCall",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -363,14 +351,6 @@
               "eventSubTopic"
             ],
             "createSql": "CREATE  INDEX `index_Event_eventSubTopic` ON `${TABLE_NAME}` (`eventSubTopic`)"
-          },
-          {
-            "name": "index_Event_speakersCall",
-            "unique": false,
-            "columnNames": [
-              "speakersCall"
-            ],
-            "createSql": "CREATE  INDEX `index_Event_speakersCall` ON `${TABLE_NAME}` (`speakersCall`)"
           }
         ],
         "foreignKeys": []
@@ -576,7 +556,7 @@
       },
       {
         "tableName": "Ticket",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `description` TEXT, `type` TEXT, `name` TEXT NOT NULL, `maxOrder` INTEGER NOT NULL, `isFeeAbsorbed` INTEGER, `isDescriptionVisible` INTEGER, `price` REAL NOT NULL, `position` TEXT, `quantity` TEXT, `isHidden` INTEGER, `salesStartsAt` TEXT, `salesEndsAt` TEXT, `minOrder` INTEGER NOT NULL, `event` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`event`) REFERENCES `Event`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `description` TEXT, `type` TEXT, `name` TEXT NOT NULL, `maxOrder` INTEGER NOT NULL, `isFeeAbsorbed` INTEGER, `isDescriptionVisible` INTEGER, `price` REAL, `position` TEXT, `quantity` TEXT, `isHidden` INTEGER, `salesStartsAt` TEXT, `salesEndsAt` TEXT, `minOrder` INTEGER NOT NULL, `event` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`event`) REFERENCES `Event`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -624,7 +604,7 @@
             "fieldPath": "price",
             "columnName": "price",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "position",
@@ -701,7 +681,7 @@
       },
       {
         "tableName": "Attendee",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `firstname` TEXT, `lastname` TEXT, `email` TEXT, `address` TEXT, `city` TEXT, `state` TEXT, `country` TEXT, `jobTitle` TEXT, `phone` TEXT, `taxBusinessInfo` TEXT, `billingAddress` TEXT, `homeAddress` TEXT, `shippingAddress` TEXT, `company` TEXT, `workAddress` TEXT, `workPhone` TEXT, `website` TEXT, `blog` TEXT, `github` TEXT, `facebook` TEXT, `twitter` TEXT, `gender` TEXT, `isCheckedIn` INTEGER, `checkinTimes` TEXT, `isCheckedOut` INTEGER NOT NULL, `pdfUrl` TEXT, `ticketId` TEXT, `checkedIn` TEXT, `checkedOut` TEXT, `event` INTEGER, `ticket` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`event`) REFERENCES `Event`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`ticket`) REFERENCES `Ticket`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `firstname` TEXT, `lastname` TEXT, `email` TEXT, `address` TEXT, `city` TEXT, `state` TEXT, `country` TEXT, `isCheckedIn` INTEGER, `pdfUrl` TEXT, `ticketId` TEXT, `event` INTEGER, `ticket` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`event`) REFERENCES `Event`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`ticket`) REFERENCES `Ticket`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -752,112 +732,10 @@
             "notNull": false
           },
           {
-            "fieldPath": "jobTitle",
-            "columnName": "jobTitle",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "phone",
-            "columnName": "phone",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "taxBusinessInfo",
-            "columnName": "taxBusinessInfo",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "billingAddress",
-            "columnName": "billingAddress",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "homeAddress",
-            "columnName": "homeAddress",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "shippingAddress",
-            "columnName": "shippingAddress",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "company",
-            "columnName": "company",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "workAddress",
-            "columnName": "workAddress",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "workPhone",
-            "columnName": "workPhone",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "website",
-            "columnName": "website",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "blog",
-            "columnName": "blog",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "github",
-            "columnName": "github",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "facebook",
-            "columnName": "facebook",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "twitter",
-            "columnName": "twitter",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "gender",
-            "columnName": "gender",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "isCheckedIn",
             "columnName": "isCheckedIn",
             "affinity": "INTEGER",
             "notNull": false
-          },
-          {
-            "fieldPath": "checkinTimes",
-            "columnName": "checkinTimes",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "isCheckedOut",
-            "columnName": "isCheckedOut",
-            "affinity": "INTEGER",
-            "notNull": true
           },
           {
             "fieldPath": "pdfUrl",
@@ -868,18 +746,6 @@
           {
             "fieldPath": "ticketId",
             "columnName": "ticketId",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "checkedIn",
-            "columnName": "checkedIn",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "checkedOut",
-            "columnName": "checkedOut",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -910,14 +776,6 @@
               "event"
             ],
             "createSql": "CREATE  INDEX `index_Attendee_event` ON `${TABLE_NAME}` (`event`)"
-          },
-          {
-            "name": "index_Attendee_ticket",
-            "unique": false,
-            "columnNames": [
-              "ticket"
-            ],
-            "createSql": "CREATE  INDEX `index_Attendee_ticket` ON `${TABLE_NAME}` (`ticket`)"
           }
         ],
         "foreignKeys": [
@@ -1006,7 +864,7 @@
       },
       {
         "tableName": "Order",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `paymentMode` TEXT, `country` TEXT, `status` TEXT, `amount` REAL NOT NULL, `identifier` TEXT, `orderNotes` TEXT, `completedAt` TEXT, `state` TEXT, `city` TEXT, `address` TEXT, `createdAt` TEXT, `zipcode` TEXT, `paidVia` TEXT, `discountCodeId` TEXT, `ticketsPdfUrl` TEXT, `transactionId` TEXT, `isBillingEnabled` INTEGER NOT NULL, `taxBusinessInfo` TEXT, `company` TEXT, `isExpired` INTEGER, `event` INTEGER, `attendees` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `paymentMode` TEXT, `country` TEXT, `status` TEXT, `amount` REAL NOT NULL, `identifier` TEXT, `orderNotes` TEXT, `completedAt` TEXT, `city` TEXT, `address` TEXT, `createdAt` TEXT, `zipcode` TEXT, `paidVia` TEXT, `discountCodeId` TEXT, `ticketsPdfUrl` TEXT, `transactionId` TEXT, `event` INTEGER, `attendees` TEXT NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`event`) REFERENCES `Event`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`attendees`) REFERENCES `Attendee`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -1053,12 +911,6 @@
           {
             "fieldPath": "completedAt",
             "columnName": "completedAt",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "state",
-            "columnName": "state",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -1111,30 +963,6 @@
             "notNull": false
           },
           {
-            "fieldPath": "isBillingEnabled",
-            "columnName": "isBillingEnabled",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "taxBusinessInfo",
-            "columnName": "taxBusinessInfo",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "company",
-            "columnName": "company",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "isExpired",
-            "columnName": "isExpired",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
             "fieldPath": "event",
             "columnName": "event",
             "affinity": "INTEGER",
@@ -1163,11 +991,34 @@
             "createSql": "CREATE  INDEX `index_Order_event` ON `${TABLE_NAME}` (`event`)"
           }
         ],
-        "foreignKeys": []
+        "foreignKeys": [
+          {
+            "table": "Event",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "event"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Attendee",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "attendees"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       },
       {
         "tableName": "CustomForm",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `form` TEXT NOT NULL, `fieldIdentifier` TEXT NOT NULL, `type` TEXT NOT NULL, `isRequired` INTEGER NOT NULL, `isIncluded` INTEGER NOT NULL, `isFixed` INTEGER, `ticketsNumber` INTEGER, `event` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`event`) REFERENCES `Event`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `form` TEXT NOT NULL, `fieldIdentifier` TEXT NOT NULL, `type` TEXT NOT NULL, `isRequired` INTEGER, `isIncluded` INTEGER, `isFixed` INTEGER, `ticketsNumber` INTEGER, `event` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`event`) REFERENCES `Event`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -1197,13 +1048,13 @@
             "fieldPath": "isRequired",
             "columnName": "isRequired",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "isIncluded",
             "columnName": "isIncluded",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "isFixed",
@@ -1247,7 +1098,7 @@
       },
       {
         "tableName": "Speaker",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT, `email` TEXT, `photoUrl` TEXT, `shortBiography` TEXT, `longBiography` TEXT, `speakingExperience` TEXT, `position` TEXT, `mobile` TEXT, `location` TEXT, `country` TEXT, `city` TEXT, `organisation` TEXT, `gender` TEXT, `website` TEXT, `twitter` TEXT, `facebook` TEXT, `linkedin` TEXT, `github` TEXT, `heardFrom` TEXT, `isFeatured` INTEGER NOT NULL, `event` INTEGER, `user` INTEGER, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT, `email` TEXT, `photoUrl` TEXT, `shortBiography` TEXT, `longBiography` TEXT, `speakingExperience` TEXT, `position` TEXT, `mobile` TEXT, `location` TEXT, `country` TEXT, `city` TEXT, `organisation` TEXT, `gender` TEXT, `website` TEXT, `twitter` TEXT, `facebook` TEXT, `linkedin` TEXT, `github` TEXT, `isFeatured` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -1364,28 +1215,10 @@
             "notNull": false
           },
           {
-            "fieldPath": "heardFrom",
-            "columnName": "heardFrom",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "isFeatured",
             "columnName": "isFeatured",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "event",
-            "columnName": "event",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "user",
-            "columnName": "user",
-            "affinity": "INTEGER",
-            "notNull": false
           }
         ],
         "primaryKey": {
@@ -1394,24 +1227,7 @@
           ],
           "autoGenerate": false
         },
-        "indices": [
-          {
-            "name": "index_Speaker_event",
-            "unique": false,
-            "columnNames": [
-              "event"
-            ],
-            "createSql": "CREATE  INDEX `index_Speaker_event` ON `${TABLE_NAME}` (`event`)"
-          },
-          {
-            "name": "index_Speaker_user",
-            "unique": false,
-            "columnNames": [
-              "user"
-            ],
-            "createSql": "CREATE  INDEX `index_Speaker_user` ON `${TABLE_NAME}` (`user`)"
-          }
-        ],
+        "indices": [],
         "foreignKeys": []
       },
       {
@@ -1606,7 +1422,7 @@
       },
       {
         "tableName": "Session",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `shortAbstract` TEXT, `comments` TEXT, `longAbstract` TEXT, `level` TEXT, `signupUrl` TEXT, `endsAt` TEXT, `language` TEXT, `title` TEXT, `startsAt` TEXT, `slidesUrl` TEXT, `averageRating` REAL, `submittedAt` TEXT, `deletedAt` TEXT, `subtitle` TEXT, `createdAt` TEXT, `state` TEXT, `lastModifiedAt` TEXT, `videoUrl` TEXT, `audioUrl` TEXT, `sessionType` TEXT, `microlocation` TEXT, `track` TEXT, `event` INTEGER, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `shortAbstract` TEXT, `comments` TEXT, `longAbstract` TEXT, `level` TEXT, `signupUrl` TEXT, `endsAt` TEXT, `language` TEXT, `title` TEXT, `startsAt` TEXT, `slidesUrl` TEXT, `averageRating` REAL, `submittedAt` TEXT, `deletedAt` TEXT, `subtitle` TEXT, `createdAt` TEXT, `state` TEXT, `lastModifiedAt` TEXT, `videoUrl` TEXT, `audioUrl` TEXT, `sessionType` TEXT, `microlocation` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -1739,18 +1555,6 @@
             "columnName": "microlocation",
             "affinity": "TEXT",
             "notNull": false
-          },
-          {
-            "fieldPath": "track",
-            "columnName": "track",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "event",
-            "columnName": "event",
-            "affinity": "INTEGER",
-            "notNull": false
           }
         ],
         "primaryKey": {
@@ -1775,458 +1579,6 @@
               "microlocation"
             ],
             "createSql": "CREATE  INDEX `index_Session_microlocation` ON `${TABLE_NAME}` (`microlocation`)"
-          },
-          {
-            "name": "index_Session_track",
-            "unique": false,
-            "columnNames": [
-              "track"
-            ],
-            "createSql": "CREATE  INDEX `index_Session_track` ON `${TABLE_NAME}` (`track`)"
-          },
-          {
-            "name": "index_Session_event",
-            "unique": false,
-            "columnNames": [
-              "event"
-            ],
-            "createSql": "CREATE  INDEX `index_Session_event` ON `${TABLE_NAME}` (`event`)"
-          }
-        ],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "SpeakersCall",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `announcement` TEXT NOT NULL, `startsAt` TEXT NOT NULL, `endsAt` TEXT NOT NULL, `hash` TEXT, `privacy` TEXT, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "announcement",
-            "columnName": "announcement",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "startsAt",
-            "columnName": "startsAt",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "endsAt",
-            "columnName": "endsAt",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "hash",
-            "columnName": "hash",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "privacy",
-            "columnName": "privacy",
-            "affinity": "TEXT",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Feedback",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `rating` TEXT, `comment` TEXT, `event` INTEGER, `user` INTEGER, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "rating",
-            "columnName": "rating",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "comment",
-            "columnName": "comment",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "event",
-            "columnName": "event",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "user",
-            "columnName": "user",
-            "affinity": "INTEGER",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Notification",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `message` TEXT, `receivedAt` TEXT, `isRead` INTEGER NOT NULL, `title` TEXT, `deletedAt` TEXT, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "message",
-            "columnName": "message",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "receivedAt",
-            "columnName": "receivedAt",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "isRead",
-            "columnName": "isRead",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "title",
-            "columnName": "title",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "deletedAt",
-            "columnName": "deletedAt",
-            "affinity": "TEXT",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Settings",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `appName` TEXT, `tagline` TEXT, `isPaypalActivated` INTEGER NOT NULL, `isStripeActivated` INTEGER NOT NULL, `isOmiseActivated` INTEGER NOT NULL, `frontendUrl` TEXT, `cookiePolicy` TEXT, `cookiePolicyLink` TEXT, `orderExpiryTime` INTEGER, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "appName",
-            "columnName": "appName",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "tagline",
-            "columnName": "tagline",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "isPaypalActivated",
-            "columnName": "isPaypalActivated",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isStripeActivated",
-            "columnName": "isStripeActivated",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isOmiseActivated",
-            "columnName": "isOmiseActivated",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "frontendUrl",
-            "columnName": "frontendUrl",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "cookiePolicy",
-            "columnName": "cookiePolicy",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "cookiePolicyLink",
-            "columnName": "cookiePolicyLink",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "orderExpiryTime",
-            "columnName": "orderExpiryTime",
-            "affinity": "INTEGER",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Proposal",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `title` TEXT, `language` TEXT, `shortAbstract` TEXT, `comments` TEXT, `startsAt` TEXT, `endsAt` TEXT, `subTitle` TEXT, `longAbstract` TEXT, `track` TEXT, `event` INTEGER, `speakers` TEXT NOT NULL, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "title",
-            "columnName": "title",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "language",
-            "columnName": "language",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "shortAbstract",
-            "columnName": "shortAbstract",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "comments",
-            "columnName": "comments",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "startsAt",
-            "columnName": "startsAt",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "endsAt",
-            "columnName": "endsAt",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "subTitle",
-            "columnName": "subTitle",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "longAbstract",
-            "columnName": "longAbstract",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "track",
-            "columnName": "track",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "event",
-            "columnName": "event",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "speakers",
-            "columnName": "speakers",
-            "affinity": "TEXT",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [
-          {
-            "name": "index_Proposal_track",
-            "unique": false,
-            "columnNames": [
-              "track"
-            ],
-            "createSql": "CREATE  INDEX `index_Proposal_track` ON `${TABLE_NAME}` (`track`)"
-          },
-          {
-            "name": "index_Proposal_event",
-            "unique": false,
-            "columnNames": [
-              "event"
-            ],
-            "createSql": "CREATE  INDEX `index_Proposal_event` ON `${TABLE_NAME}` (`event`)"
-          },
-          {
-            "name": "index_Proposal_speakers",
-            "unique": false,
-            "columnNames": [
-              "speakers"
-            ],
-            "createSql": "CREATE  INDEX `index_Proposal_speakers` ON `${TABLE_NAME}` (`speakers`)"
-          }
-        ],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Tax",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `name` TEXT, `rate` REAL, `taxId` TEXT, `registeredCompany` TEXT, `address` TEXT, `city` TEXT, `stare` TEXT, `zip` TEXT, `invoiceFooter` TEXT, `isInvoiceSend` INTEGER NOT NULL, `isTaxIncludedInPrice` INTEGER NOT NULL, `shouldSendInvoice` INTEGER NOT NULL, `eventId` INTEGER, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "rate",
-            "columnName": "rate",
-            "affinity": "REAL",
-            "notNull": false
-          },
-          {
-            "fieldPath": "taxId",
-            "columnName": "taxId",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "registeredCompany",
-            "columnName": "registeredCompany",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "address",
-            "columnName": "address",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "city",
-            "columnName": "city",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "stare",
-            "columnName": "stare",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "zip",
-            "columnName": "zip",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "invoiceFooter",
-            "columnName": "invoiceFooter",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "isInvoiceSend",
-            "columnName": "isInvoiceSend",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isTaxIncludedInPrice",
-            "columnName": "isTaxIncludedInPrice",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "shouldSendInvoice",
-            "columnName": "shouldSendInvoice",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "eventId",
-            "columnName": "eventId",
-            "affinity": "INTEGER",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [
-          {
-            "name": "index_Tax_eventId",
-            "unique": false,
-            "columnNames": [
-              "eventId"
-            ],
-            "createSql": "CREATE  INDEX `index_Tax_eventId` ON `${TABLE_NAME}` (`eventId`)"
           }
         ],
         "foreignKeys": []
@@ -2235,7 +1587,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ceaeb211922de9668d95362a86917dac')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"1c62806166a2886751e22adada684c1a\")"
     ]
   }
 }

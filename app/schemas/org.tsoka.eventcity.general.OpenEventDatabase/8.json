@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 9,
-    "identityHash": "ceaeb211922de9668d95362a86917dac",
+    "version": 8,
+    "identityHash": "35acee6b8147d48c581bb8f884508c79",
     "entities": [
       {
         "tableName": "Event",
@@ -701,7 +701,7 @@
       },
       {
         "tableName": "Attendee",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `firstname` TEXT, `lastname` TEXT, `email` TEXT, `address` TEXT, `city` TEXT, `state` TEXT, `country` TEXT, `jobTitle` TEXT, `phone` TEXT, `taxBusinessInfo` TEXT, `billingAddress` TEXT, `homeAddress` TEXT, `shippingAddress` TEXT, `company` TEXT, `workAddress` TEXT, `workPhone` TEXT, `website` TEXT, `blog` TEXT, `github` TEXT, `facebook` TEXT, `twitter` TEXT, `gender` TEXT, `isCheckedIn` INTEGER, `checkinTimes` TEXT, `isCheckedOut` INTEGER NOT NULL, `pdfUrl` TEXT, `ticketId` TEXT, `checkedIn` TEXT, `checkedOut` TEXT, `event` INTEGER, `ticket` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`event`) REFERENCES `Event`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`ticket`) REFERENCES `Ticket`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `firstname` TEXT, `lastname` TEXT, `email` TEXT, `address` TEXT, `city` TEXT, `state` TEXT, `country` TEXT, `jobTitle` TEXT, `phone` TEXT, `taxBusinessInfo` TEXT, `billingAddress` TEXT, `homeAddress` TEXT, `shippingAddress` TEXT, `company` TEXT, `workAddress` TEXT, `workPhone` TEXT, `website` TEXT, `blog` TEXT, `github` TEXT, `facebook` TEXT, `twitter` TEXT, `gender` TEXT, `isCheckedIn` INTEGER, `checkinTimes` TEXT, `isCheckedOut` INTEGER NOT NULL, `pdfUrl` TEXT, `ticketId` TEXT, `event` INTEGER, `ticket` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`event`) REFERENCES `Event`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`ticket`) REFERENCES `Ticket`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -872,18 +872,6 @@
             "notNull": false
           },
           {
-            "fieldPath": "checkedIn",
-            "columnName": "checkedIn",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "checkedOut",
-            "columnName": "checkedOut",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "event",
             "columnName": "event",
             "affinity": "INTEGER",
@@ -1006,7 +994,7 @@
       },
       {
         "tableName": "Order",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `paymentMode` TEXT, `country` TEXT, `status` TEXT, `amount` REAL NOT NULL, `identifier` TEXT, `orderNotes` TEXT, `completedAt` TEXT, `state` TEXT, `city` TEXT, `address` TEXT, `createdAt` TEXT, `zipcode` TEXT, `paidVia` TEXT, `discountCodeId` TEXT, `ticketsPdfUrl` TEXT, `transactionId` TEXT, `isBillingEnabled` INTEGER NOT NULL, `taxBusinessInfo` TEXT, `company` TEXT, `isExpired` INTEGER, `event` INTEGER, `attendees` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `paymentMode` TEXT, `country` TEXT, `status` TEXT, `amount` REAL NOT NULL, `identifier` TEXT, `orderNotes` TEXT, `completedAt` TEXT, `city` TEXT, `address` TEXT, `createdAt` TEXT, `zipcode` TEXT, `paidVia` TEXT, `discountCodeId` TEXT, `ticketsPdfUrl` TEXT, `transactionId` TEXT, `isBillingEnabled` INTEGER NOT NULL, `taxBusinessInfo` TEXT, `company` TEXT, `event` INTEGER, `attendees` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -1053,12 +1041,6 @@
           {
             "fieldPath": "completedAt",
             "columnName": "completedAt",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "state",
-            "columnName": "state",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -1126,12 +1108,6 @@
             "fieldPath": "company",
             "columnName": "company",
             "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "isExpired",
-            "columnName": "isExpired",
-            "affinity": "INTEGER",
             "notNull": false
           },
           {
@@ -2123,119 +2099,12 @@
           }
         ],
         "foreignKeys": []
-      },
-      {
-        "tableName": "Tax",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `name` TEXT, `rate` REAL, `taxId` TEXT, `registeredCompany` TEXT, `address` TEXT, `city` TEXT, `stare` TEXT, `zip` TEXT, `invoiceFooter` TEXT, `isInvoiceSend` INTEGER NOT NULL, `isTaxIncludedInPrice` INTEGER NOT NULL, `shouldSendInvoice` INTEGER NOT NULL, `eventId` INTEGER, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "rate",
-            "columnName": "rate",
-            "affinity": "REAL",
-            "notNull": false
-          },
-          {
-            "fieldPath": "taxId",
-            "columnName": "taxId",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "registeredCompany",
-            "columnName": "registeredCompany",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "address",
-            "columnName": "address",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "city",
-            "columnName": "city",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "stare",
-            "columnName": "stare",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "zip",
-            "columnName": "zip",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "invoiceFooter",
-            "columnName": "invoiceFooter",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "isInvoiceSend",
-            "columnName": "isInvoiceSend",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isTaxIncludedInPrice",
-            "columnName": "isTaxIncludedInPrice",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "shouldSendInvoice",
-            "columnName": "shouldSendInvoice",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "eventId",
-            "columnName": "eventId",
-            "affinity": "INTEGER",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [
-          {
-            "name": "index_Tax_eventId",
-            "unique": false,
-            "columnNames": [
-              "eventId"
-            ],
-            "createSql": "CREATE  INDEX `index_Tax_eventId` ON `${TABLE_NAME}` (`eventId`)"
-          }
-        ],
-        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ceaeb211922de9668d95362a86917dac')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '35acee6b8147d48c581bb8f884508c79')"
     ]
   }
 }
